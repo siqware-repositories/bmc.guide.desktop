@@ -7,8 +7,8 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
-      /*'i18n',
-      'axios',*/
+      /*'i18n',*/
+      'axios',
       'auth_router',
     ],
 
@@ -51,7 +51,9 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'LocalStorage',
-        'Notify'
+        'Notify',
+        'Loading',
+        'Dialog'
       ]
     },
 
@@ -83,9 +85,9 @@ module.exports = function (ctx) {
       open: true // opens browser window automatically
     },
 
-    // animations: 'all', // --- includes all animations
+    animations: 'all', // --- includes all animations
     // https://quasar.dev/options/animations
-    animations: [],
+    //animations: [],
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {

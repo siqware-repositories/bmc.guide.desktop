@@ -7,6 +7,12 @@ const routes = [
       {
         path: '',
         component: () => import('../pages/Index.vue'),
+      },{
+        path: '/travel',
+        component: () => import('pages/travel/Travel.vue'),
+      },{
+        path: '/restaurant',
+        component: () => import('../pages/Restaurant.vue'),
       }
     ]
   },

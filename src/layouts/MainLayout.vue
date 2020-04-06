@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr fff" class="bg-grey-1">
-    <q-header elevated class="bg-white text-grey-8" height-hint="64">
+    <q-header elevated class="bg-primary" height-hint="64">
       <q-toolbar class="GPL__toolbar" style="height: 64px">
         <q-btn
                 flat
@@ -13,51 +13,12 @@
         />
 
         <q-toolbar-title v-if="$q.screen.gt.sm" shrink class="row items-center no-wrap">
-          <!--<img src="https://cdn.quasar.dev/img/layout-gallery/logo-google.svg">-->
-          <!--<span class="q-ml-sm text-primary">BMC Guide</span>-->
-          <span class="text-primary">BMC Guide</span>
+          <span>BMC Guide</span>
         </q-toolbar-title>
 
         <q-space />
 
-        <q-input class="GPL__toolbar-input" dense standout="bg-primary" v-model="search" placeholder="Search">
-          <template v-slot:prepend>
-            <q-icon v-if="search === ''" name="search" />
-            <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
-          </template>
-        </q-input>
-
-        <q-space />
         <div class="q-pl-sm q-gutter-sm row items-center no-wrap">
-          <q-btn v-if="$q.screen.gt.xs" dense flat round size="sm" icon="notifications" />
-          <q-btn v-if="$q.screen.gt.xs" dense flat>
-            <div class="row items-center no-wrap">
-              <q-icon name="add" size="20px" />
-              <q-icon name="arrow_drop_down" size="16px" style="margin-left: -2px" />
-            </div>
-            <q-menu auto-close>
-              <q-list dense style="min-width: 100px">
-                <q-item clickable class="GL__menu-link">
-                  <q-item-section>New repository</q-item-section>
-                </q-item>
-                <q-item clickable class="GL__menu-link">
-                  <q-item-section>Import repository</q-item-section>
-                </q-item>
-                <q-item clickable class="GL__menu-link">
-                  <q-item-section>New gist</q-item-section>
-                </q-item>
-                <q-item clickable class="GL__menu-link">
-                  <q-item-section>New organization</q-item-section>
-                </q-item>
-                <q-separator />
-                <q-item-label header>This repository</q-item-label>
-                <q-item clickable class="GL__menu-link">
-                  <q-item-section>New issue</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-btn>
-
           <q-btn dense flat no-wrap>
             <q-avatar rounded size="20px">
               <img src="https://cdn.quasar.dev/img/avatar3.jpg">
@@ -97,7 +58,6 @@
       <q-scroll-area class="fit">
         <q-toolbar class="GPL__toolbar">
           <q-toolbar-title class="row items-center text-grey-8">
-            <!--<img class="q-pl-md" src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg">-->
             <span class="q-ml-sm text-primary">BMC Guide</span>
           </q-toolbar-title>
         </q-toolbar>
@@ -117,17 +77,19 @@
 
     <q-page-container class="GPL__page-container">
       <router-view />
-
-      <q-page-sticky v-if="$q.screen.gt.sm" expand position="left">
+      <q-page-sticky v-if="$q.screen.gt.sm" expand position="left" class="bg-white">
         <div class="fit q-pt-md q-px-sm column">
-          <q-btn round flat color="grey-8" stack no-caps size="26px" class="GPL__side-btn">
-            <q-icon size="22px" name="photo" />
-            <div class="GPL__side-btn__label">Photos</div>
+          <q-btn round flat color="primary" stack no-caps size="26px" class="GPL__side-btn">
+            <q-icon size="22px" name="home" />
+            <div class="GPL__side-btn__label">Home</div>
           </q-btn>
-
-          <q-btn round flat color="grey-8" stack no-caps size="26px" class="GPL__side-btn">
-            <q-icon size="22px" name="collections_bookmark" />
-            <div class="GPL__side-btn__label">Albums</div>
+          <q-btn round flat color="orange" stack no-caps size="26px" class="GPL__side-btn">
+            <q-icon size="22px" name="send" />
+            <div class="GPL__side-btn__label">Travel</div>
+          </q-btn>
+          <q-btn round flat color="positive" stack no-caps size="26px" class="GPL__side-btn">
+            <q-icon size="22px" name="restaurant" />
+            <div class="GPL__side-btn__label">Restaurant</div>
           </q-btn>
         </div>
       </q-page-sticky>
@@ -152,8 +114,9 @@ export default {
       search: '',
       storage: 0.26,
       navigations: [
-        { icon: 'list', text: 'List' ,to:'/'},
-        { icon: 'people', text: 'User' ,to:'/login'},
+        { icon: 'home', text: 'Home' ,to:'/'},
+        { icon: 'send', text: 'Travel' ,to:'/travel'},
+        { icon: 'restaurant', text: 'Restaurant' ,to:'/restaurant'},
       ]
     }
   },
