@@ -8,7 +8,7 @@
   >
     <q-card>
       <q-bar>
-        <div>Edit Travel</div>
+        <div>Edit Restaurant / Cafe / Hotel</div>
 
         <q-space/>
 
@@ -23,7 +23,7 @@
         </q-btn>
       </q-bar>
       <q-card-section class="row items-center">
-        <q-form @submit="updateTravel" class="full-width">
+        <q-form @submit="updateRestaurant" class="full-width">
           <div class="row q-col-gutter-xs">
             <div class="col-12">
               <q-input
@@ -270,15 +270,15 @@
         </q-form>
       </q-card-section>
     </q-card>
-    <TravelCategory ref="addCategory"/>
+    <RestaurantCategory ref="addCategory"/>
   </q-dialog>
 </template>
 
 <script>
-    import TravelCategory from "pages/travel/TravelCategory";
+    import RestaurantCategory from "pages/restaurant/RestaurantCategory";
     export default {
-        name: 'TravelEdit',
-        components: {TravelCategory},
+        name: 'RestaurantEdit',
+        components: {RestaurantCategory},
         data() {
             return {
                 confirm: false,
@@ -321,7 +321,7 @@
         computed: {
             getCategory(){
                 let self = this;
-                return self.$store.getters['travel_category/getTravelCategory'].map(function (x) {
+                return self.$store.getters['restaurant_category/getRestaurantCategory'].map(function (x) {
                     return x.name
                 })
             },
@@ -339,8 +339,8 @@
                         persistent: true
                     })
                     .onOk(() => {
-                        self.$store.dispatch("travel/deleteGalleryDetail", id).then(function () {
-                            self.$store.dispatch("travel/indexTravel").then(function () {
+                        self.$store.dispatch("restaurant/deleteGalleryDetail", id).then(function () {
+                            self.$store.dispatch("restaurant/indexRestaurant").then(function () {
                                 self.$q.notify({
                                     message: "Was deleted",
                                     position: "top",
@@ -388,7 +388,7 @@
                 this.data.galleries = data.gallery;
                 this.data.category = data.category;
             },
-            updateTravel() {
+            updateRestaurant() {
                 let self = this;
                 self.formData.set('title', self.data.title);
                 self.formData.set('description', self.data.description);
@@ -396,8 +396,8 @@
                 self.formData.set('category',self.data.category);
                 self.formData.set('id', self.data.id);
                 // self.$q.loading.show();
-                this.$store.dispatch('travel/updateTravel', self.formData).then(function (data) {
-                    self.$store.dispatch("travel/indexTravel").then(function () {
+                this.$store.dispatch('restaurant/updateRestaurant', self.formData).then(function (data) {
+                    self.$store.dispatch("restaurant/indexRestaurant").then(function () {
                         for (let key of self.formData.keys()) {
                             // here you can add filtering conditions
                             self.formData.delete(key)

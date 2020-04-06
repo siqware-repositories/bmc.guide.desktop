@@ -98,7 +98,7 @@
                                 icon: 'cloud_done',
                                 message: 'Logging in.....'
                             });
-                            window.location.href = "/"
+                            self.$router.push('/')
                         }
                     } else {
                         self.$q.notify({

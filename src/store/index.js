@@ -4,6 +4,9 @@ import auth from './auth'
 import file_upload from './file_upload'
 import travel from './travel'
 import travel_category from './travel_category'
+import restaurant_category from './restaurant_category'
+import restaurant from './restaurant'
+import settings from './settings'
 Vue.use(Vuex);
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
@@ -11,7 +14,10 @@ export default function (/* { ssrContext } */) {
       auth,
       file_upload,
       travel,
-      travel_category
+      travel_category,
+      restaurant_category,
+      restaurant,
+      settings,
     },
     // enable strict mode (adds overhead!)
     // for dev mode only

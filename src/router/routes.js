@@ -6,13 +6,13 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('../pages/Index.vue'),
+        component: () => import('pages/travel/Travel.vue'),
       },{
         path: '/travel',
         component: () => import('pages/travel/Travel.vue'),
       },{
         path: '/restaurant',
-        component: () => import('../pages/Restaurant.vue'),
+        component: () => import('../pages/restaurant/Restaurant'),
       }
     ]
   },

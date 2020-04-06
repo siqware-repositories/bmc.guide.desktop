@@ -33,10 +33,7 @@
                   </q-item-section>
                 </q-item>
                 <q-separator />
-                <q-item clickable class="GL__menu-link">
-                  <q-item-section>Help</q-item-section>
-                </q-item>
-                <q-item clickable class="GL__menu-link">
+                <q-item clickable class="GL__menu-link" @click="$refs.Settings.show()">
                   <q-item-section>Settings</q-item-section>
                 </q-item>
                 <q-item clickable @click="logout" class="GL__menu-link">
@@ -79,32 +76,35 @@
       <router-view />
       <q-page-sticky v-if="$q.screen.gt.sm" expand position="left" class="bg-white">
         <div class="fit q-pt-md q-px-sm column">
-          <q-btn round flat color="primary" stack no-caps size="26px" class="GPL__side-btn">
+          <q-btn round flat color="primary" stack no-caps size="26px" class="GPL__side-btn" to="/">
             <q-icon size="22px" name="home" />
             <div class="GPL__side-btn__label">Home</div>
           </q-btn>
-          <q-btn round flat color="orange" stack no-caps size="26px" class="GPL__side-btn">
+          <q-btn round flat color="orange" stack no-caps size="26px" class="GPL__side-btn" to="/travel">
             <q-icon size="22px" name="send" />
             <div class="GPL__side-btn__label">Travel</div>
           </q-btn>
-          <q-btn round flat color="positive" stack no-caps size="26px" class="GPL__side-btn">
+          <q-btn round flat color="positive" stack no-caps size="26px" class="GPL__side-btn" to="/restaurant">
             <q-icon size="22px" name="restaurant" />
             <div class="GPL__side-btn__label">Restaurant</div>
           </q-btn>
         </div>
       </q-page-sticky>
     </q-page-container>
+    <Settings ref="Settings"/>
   </q-layout>
 </template>
 
 <script>
 import EssentialLink from 'components/EssentialLink'
 import {LocalStorage} from "quasar";
+import Settings from "pages/settings/Settings";
 
 export default {
   name: 'MainLayout',
 
   components: {
+      Settings,
     EssentialLink
   },
 
@@ -135,7 +135,7 @@ export default {
   methods:{
     logout() {
       LocalStorage.remove('userInfo');
-      window.location.replace('#/login')
+        this.$router.push('/login')
     },
   }
 }

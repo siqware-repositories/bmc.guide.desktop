@@ -8,7 +8,7 @@
   >
     <q-card>
       <q-bar>
-        <div>Add Travel</div>
+        <div>Add Restaurant / Cafe / Hotel</div>
 
         <q-space/>
 
@@ -23,7 +23,7 @@
         </q-btn>
       </q-bar>
       <q-card-section class="row items-center">
-        <q-form @submit="storeTravel" @reset="onReset" class="full-width">
+        <q-form @submit="storeRestaurant" @reset="onReset" class="full-width">
           <div class="row q-col-gutter-xs">
             <div class="col-12">
               <q-input
@@ -191,15 +191,15 @@
         </q-form>
       </q-card-section>
     </q-card>
-    <TravelCategory ref="addCategory"/>
+    <RestaurantCategory ref="addCategory"/>
   </q-dialog>
 </template>
 
 <script>
-    import TravelCategory from "pages/travel/TravelCategory";
+    import RestaurantCategory from "pages/restaurant/RestaurantCategory";
     export default {
-        name: 'TravelAdd',
-        components: {TravelCategory},
+        name: 'RestaurantAdd',
+        components: {RestaurantCategory},
         data() {
             return {
                 confirm: false,
@@ -237,7 +237,7 @@
         computed: {
             getCategory(){
                 let self = this;
-                return self.$store.getters['travel_category/getTravelCategory'].map(function (x) {
+                return self.$store.getters['restaurant_category/getRestaurantCategory'].map(function (x) {
                     return x.name
                 })
             }
@@ -269,7 +269,7 @@
             show() {
                 this.confirm = true
             },
-            storeTravel(){
+            storeRestaurant(){
                 let self =  this;
                 if (self.formData.has('thumbnail')&& self.formData.has('galleries[]')){
                     self.formData.set('title',self.data.title);
@@ -277,7 +277,7 @@
                     self.formData.set('location',self.data.location);
                     self.formData.set('category',self.data.category);
                     self.$q.loading.show();
-                    this.$store.dispatch('travel/storeTravel',this.formData).then(function (data) {
+                    this.$store.dispatch('restaurant/storeRestaurant',this.formData).then(function (data) {
                         for (let key of self.formData.keys()) {
                             // here you can add filtering conditions
                             self.formData.delete(key)

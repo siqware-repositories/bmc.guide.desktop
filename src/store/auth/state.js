@@ -11,6 +11,6 @@ export default function () {
   return {
     AppActiveUser: userDefaults,
     token: LocalStorage.getItem("userInfo") || '',
-    apiUrl:'http://127.0.0.1:8000/api'
+    apiUrl:'https://bmc.guide.siqware.com/api'
   }
 }
