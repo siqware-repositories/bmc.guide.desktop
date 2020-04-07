@@ -38,7 +38,7 @@
 
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="main_location">
-          <q-form @submit="updateMainLocation" @reset="onReset" class="full-width">
+          <q-form @submit="updateMainLocation" class="full-width">
             <div class="row q-col-gutter-xs">
               <div class="col-12">
                 <q-input

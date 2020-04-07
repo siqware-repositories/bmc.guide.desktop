@@ -10,13 +10,15 @@
         <div>Travel Category</div>
 
         <q-space/>
-
-        <q-btn dense flat icon="close" v-close-popup>
-          <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+        <q-btn dense flat round icon="save" size="9.5px" color="green" @click="$refs.form.submit()">
+          <q-tooltip>Save Data</q-tooltip>
+        </q-btn>
+        <q-btn dense flat round icon="lens" size="9.5px" color="red" v-close-popup>
+          <q-tooltip>Close</q-tooltip>
         </q-btn>
       </q-bar>
       <q-card-section class="row items-center">
-        <q-form class="full-width" @submit="storeTravelCategory">
+        <q-form ref="form" class="full-width" @submit="storeTravelCategory">
           <div class="row q-col-gutter-xs">
             <div class="col-12">
               <q-input
@@ -34,6 +36,21 @@
                   Type and hit enter to add!
                 </q-tooltip>
               </q-input>
+            </div>
+            <div class="col-12">
+              <q-file
+                v-model="data.icon"
+                label="Pick icon"
+                dense
+                square
+                outlined
+                class="full-width"
+                :rules="[ val => !!val || 'Please insert icon']"
+              >
+                <q-tooltip>
+                  Insert icon
+                </q-tooltip>
+              </q-file>
             </div>
           </div>
         </q-form>
@@ -79,6 +96,7 @@
                 confirm: false,
                 data: {
                     name: '',
+                    icon:null
                 }
             };
         },
@@ -95,8 +113,11 @@
             },
             storeTravelCategory(){
                 let self =  this;
+                let formData = new FormData();
+                formData.set('name',self.data.name);
+                formData.set('icon',self.data.icon);
                 self.$q.loading.show();
-                self.$store.dispatch('travel_category/storeTravelCategory',self.data).then(function (data) {
+                self.$store.dispatch('travel_category/storeTravelCategory',formData).then(function (data) {
                     self.onReset();
                     self.$q.loading.hide();
                     self.$q.notify({

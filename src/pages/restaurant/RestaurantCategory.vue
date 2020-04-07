@@ -10,13 +10,15 @@
         <div>Restaurant / Cafe / Hotel Category</div>
 
         <q-space/>
-
-        <q-btn dense flat icon="close" v-close-popup>
-          <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+        <q-btn dense flat round icon="save" size="9.5px" color="green" @click="$refs.form.submit()">
+          <q-tooltip>Save Data</q-tooltip>
+        </q-btn>
+        <q-btn dense flat round icon="lens" size="9.5px" color="red" v-close-popup>
+          <q-tooltip>Close</q-tooltip>
         </q-btn>
       </q-bar>
       <q-card-section class="row items-center">
-        <q-form class="full-width" @submit="storeRestaurantCategory">
+        <q-form ref="form" class="full-width" @submit="storeRestaurantCategory">
           <div class="row q-col-gutter-xs">
             <div class="col-12">
               <q-input
@@ -35,6 +37,21 @@
                 </q-tooltip>
               </q-input>
             </div>
+            <div class="col-12">
+              <q-file
+                v-model="data.icon"
+                label="Pick icon"
+                dense
+                square
+                outlined
+                class="full-width"
+                :rules="[ val => !!val || 'Please insert icon']"
+              >
+                <q-tooltip>
+                  Insert icon
+                </q-tooltip>
+              </q-file>
+            </div>
           </div>
         </q-form>
         <q-list bordered class="full-width" separator>
@@ -50,7 +67,7 @@
 
             <q-item-section top side>
               <div class="text-grey-8">
-                <q-btn size="12px" flat dense round icon="delete" @click="destroyRestaurantCategory(i.id)"/>
+                <q-btn size="12px" flat dense round icon="delete" @click="destroyTravelCategory(i.id)"/>
               </div>
             </q-item-section>
           </q-item>
@@ -79,6 +96,7 @@
                 confirm: false,
                 data: {
                     name: '',
+                    icon:null
                 }
             };
         },
@@ -95,8 +113,11 @@
             },
             storeRestaurantCategory(){
                 let self =  this;
+                let formData = new FormData();
+                formData.set('name',self.data.name);
+                formData.set('icon',self.data.icon);
                 self.$q.loading.show();
-                self.$store.dispatch('restaurant_category/storeRestaurantCategory',self.data).then(function (data) {
+                self.$store.dispatch('restaurant_category/storeRestaurantCategory',formData).then(function (data) {
                     self.onReset();
                     self.$q.loading.hide();
                     self.$q.notify({
@@ -129,6 +150,7 @@
             },
             onReset () {
                 this.data.name = null;
+                this.data.icon = null;
             }
         }
     };
